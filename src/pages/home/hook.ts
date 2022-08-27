@@ -16,7 +16,7 @@ interface ListTypes {
 }
 
 const useHome = () => {
-  const [list, setList] = useState<ListTypes[]>([])
+  const [list, setList] = useState<ListTypes[] | []>([])
 
   const fetchList = () => {
     const endpoint = 'https://us-central1-rapid-api-321400.cloudfunctions.net/instaviagem-challenge'

@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import Navbar from "../Navbar"
 
 interface Props {
-  children: ReactNode
+  children: any
 }
 
 const Layout = ({ children }: Props) => {

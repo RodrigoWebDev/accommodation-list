@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom";
 
 //Hooks
 import { useDesktop } from "../../hooks"
@@ -13,12 +14,12 @@ import xMark from "../../assets/circle-x-mark.svg"
 
 const navItems = [
   {
-    name: 'Accommodations',
-    url: '/accommodations'
-  },
-  {
     name: 'Favorites',
     url: '/favorites'
+  },
+  {
+    name: 'About',
+    url: '/about'
   },
 ]
 
@@ -36,16 +37,16 @@ const NavBar = () => {
         <div 
           className="collapse navbar-collapse flex flex-grow items-center justify-between" 
         >
-          <a 
+          <Link 
             className="flex items-center text-gray-900hover:text-gray-900 focus:text-gray-900" 
-            href="/"
+            to="/"
           >
             <img 
               src={logo} alt=""
               loading="lazy"
               className={iconSize}
             />
-          </a>
+          </Link>
           {canShowMobileMenu() &&
             <ul className="navbar-nav flex flex-col md:flex-row pl-0 list-style-none fixed md:static w-full md:w-auto h-screen md:h-auto top-0 md:top-auto left-0 md:left-auto z-10 md:z-auto bg-gray-100 md:bg-transparent items-center md:items-stretch text-lg md:text-base p-4 md:p-0">
               <div className="self-end md:hidden">
@@ -57,12 +58,12 @@ const NavBar = () => {
               </div>
               {navItems.map(({ name, url }) =>
                 <li className="nav-item md:p-2">
-                  <a 
+                  <Link 
+                    to={url}
                     className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-4 block md:inline md:p-0" 
-                    href={url}
                   >
                     {name}
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>

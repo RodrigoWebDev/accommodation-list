@@ -18,6 +18,7 @@ const Home = () => {
             about={about}
             price={price}
             type={type}
+            id={_id}
           />
         )}
       </div>
