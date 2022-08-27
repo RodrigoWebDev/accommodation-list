@@ -1,23 +1,28 @@
 {
   "name": "my-app",
   "version": "1.0.0",
-  "private": true,
-  "description": "Frontity project",
-  "keywords": [
-    "frontity"
-  ],
+  "description": "",
   "scripts": {
-    "dev": "frontity dev",
-    "build": "frontity build",
-    "serve": "frontity serve"
+    "start": "parcel ./index.html",
+    "start-no-cache": "parcel ./index.html --no-cache",
+    "build": "parcel build ./index.html"
   },
-  "prettier": {},
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "",
+  "devDependencies": {
+    "parcel": "^2.7.0",
+    "postcss": "^8.4.16",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.1.8"
+  },
   "dependencies": {
-    "frontity": "^1.5.1",
-    "@frontity/core": "^1.5.0",
-    "@frontity/wp-source": "^1.5.0",
-    "@frontity/tiny-router": "^1.1.0",
-    "@frontity/html2react": "^1.2.0",
-    "@frontity/mars-theme": "./packages/mars-theme"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
