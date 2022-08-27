@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 import { useApi } from "../../hooks"
 import { ListTypes } from "../../interfaces"
@@ -12,7 +11,6 @@ import Banner from "../../components/Banner"
 import BuyCard from "../../components/Card/Buy"
 import ProductInformation from "../../components/ProductInformation"
 import Map from "../../components/Map"
-import Marker from "../../components/Map/Marker"
 
 const Product = () => {
   const { productId } = useParams();
@@ -36,32 +34,6 @@ const Product = () => {
   const priceBeforeTaxes = () => parseFloat(productInfo?.price) - 50
 
   const buyText = () => productInfo?.type === 'hotel' ? 'Book' : undefined
-
-  const mapLocation = () => ({
-    lat: productInfo?.latitude || 0,
-    lng: productInfo?.longitude || 0
-  })
-
-  const renderMap = (status) => {
-    switch (status) {
-      case Status.LOADING:
-        return 'Loading';
-      case Status.FAILURE:
-        return 'Map Error';
-      case Status.SUCCESS:
-        return (
-          <Map 
-            center={mapLocation()}
-            zoom={10}
-          >
-            <Marker 
-              position={mapLocation()} 
-              title='Title'
-            />
-          </Map>
-        )
-    }
-  }
 
   useEffect(() => {
     getProductInfo()
@@ -103,10 +75,14 @@ const Product = () => {
 
         <address>{productInfo?.address}</address>
 
-        <Wrapper 
-          apiKey="AIzaSyAroVYQsjCocZryzS13ra5yndO77lAABh0" 
-          render={renderMap} 
-        />
+        {
+          (productInfo?.latitude && productInfo?.longitude) && (
+            <Map 
+              lat={productInfo?.latitude}
+              lng={productInfo?.longitude}
+            />
+          )
+        }
 
       </main>
     </Layout>
