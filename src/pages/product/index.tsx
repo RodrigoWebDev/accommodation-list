@@ -30,8 +30,8 @@ const Product = () => {
       />
 
       <main className="p-4 md:w-[80%] md:mx-auto">
-        <div className="flex justify-between">
-          <div className="w-[65%] mr-8">
+        <div className="md:flex md:justify-between">
+          <div className="md:w-[65%] md:mr-8">
             <ProductInformation 
               description={productInfo?.about || ''}
               phone={productInfo?.phone || ''}
@@ -39,7 +39,7 @@ const Product = () => {
             />
           </div>
 
-          <aside className="w-[35%]">
+          <aside className="md:w-[35%]">
             <BuyCard
               price={price()}
               priceBeforeTaxes={priceBeforeTaxes()}
