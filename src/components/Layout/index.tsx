@@ -1,5 +1,6 @@
 import React, { useContext, ReactNode } from "react"
 import Navbar from "../Navbar"
+import Footer from "../Footer"
 import Loader from "../../components/Loader"
 import { PageContext } from "../../context/pageContext"
 
@@ -14,6 +15,7 @@ const Layout = ({ children }: Props) => {
     <>
       <Navbar />
       {children}
+      <Footer />
       {isFetching && <Loader />}
     </>
   )
