@@ -9,7 +9,7 @@ import heart from "../../../assets/heart.svg"
 
 interface Props {
   price: string
-  priceBeforeTaxes: number
+  priceBeforeTaxes?: number
   buyText?: string
   favoriteButtonClick: () => void
   favoriteButtonText: string

@@ -1,23 +1,42 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { ListTypes } from "../interfaces"
 import { toast } from 'react-toastify';
+import { PageContext } from "../context/pageContext"
 
 interface FetchListParams {
   successCallback: (response: ListTypes[]) => void
   errorCallback: () => void
+  finnalyCallBack: () => void
 }
 
-export const usePageTemplate = () => {
+interface UsePageTemplateParams {
+  list: ListTypes[] | []
+}
+
+interface UseFavoriteParams {
+  addFavorite: () => void
+  isFavorite: boolean
+  removeFavorite: () => void
+  favorites: string[] | []
+}
+
+export const usePageTemplate = (): UsePageTemplateParams => {
   const [list, setList] = useState<ListTypes[] | []>([])
   const { fetchList } = useApi()
+  const { setIsFetching } = useContext(PageContext)
+
 
   useEffect(() => {
+    setIsFetching(true)
     fetchList({
       successCallback: (response) => {
         setList(response)
       },
       errorCallback: () => {
         toast("There was an error querying the product list")
+      },
+      finnalyCallBack: () => {
+        setIsFetching(false)
       }
     })
   }, [])
@@ -43,7 +62,7 @@ export const useDesktop = () => {
 }
 
 export const useApi = () => {
-  const fetchList = ({ successCallback, errorCallback }: FetchListParams) => {
+  const fetchList = ({ successCallback, errorCallback, finnalyCallBack }: FetchListParams) => {
     const endpoint = 'https://us-central1-rapid-api-321400.cloudfunctions.net/instaviagem-challenge'
     fetch(endpoint)
       .then(response => response.json())
@@ -53,6 +72,9 @@ export const useApi = () => {
       .catch(() => {
         errorCallback()
       })
+      .finally(() => {
+        finnalyCallBack()
+      })
   }
 
   return {
@@ -60,7 +82,7 @@ export const useApi = () => {
   }
 }
 
-export const useFavorite = (productId?: string) => {
+export const useFavorite = (productId?: string): UseFavoriteParams => {
   const [favorites, setFavorites] = useState<string[] | []>([])
   const [isFavorite, setIsFavorite] = useState()
 

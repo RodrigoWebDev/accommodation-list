@@ -20,20 +20,22 @@ const Product = () => {
     favoriteButtonText
   } = useProduct()
 
+  if(!productInfo) <></>
+
   return (
     <Layout>
       <Banner 
-        title={productInfo?.name}
-        image={productInfo?.image}
+        title={productInfo?.name || ''}
+        image={productInfo?.image || ''}
       />
 
       <main className="p-4 md:w-[80%] md:mx-auto">
         <div className="flex justify-between">
           <div className="w-[65%] mr-8">
             <ProductInformation 
-              description={productInfo?.about}
-              phone={productInfo?.phone}
-              email={productInfo?.email}
+              description={productInfo?.about || ''}
+              phone={productInfo?.phone || ''}
+              email={productInfo?.email || ''}
             />
           </div>
 

@@ -1,8 +1,8 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 interface ButtonProps {
   type?: "button" | "submit" | "reset"
-  children?: any
+  children?: ReactNode
   customClass?: string
   onClick?: () => void
 }

@@ -3,7 +3,7 @@ import React from "react"
 interface Props {
   title: string
   value: string
-  icon: any
+  icon: string
 }
 
 const ContactItem = ({title, value, icon}: Props) => {

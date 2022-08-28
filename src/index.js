@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { PageProvider } from "./context/pageContext"
 
 //Pages
 import Home from "./pages/home";
@@ -13,11 +14,13 @@ import Favorites from "./pages/favorites";
 const root = createRoot(document.getElementById("app"));
 
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/product/:productId" element={<Product />} />
-    </Routes>
-  </BrowserRouter>
+  <PageProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/product/:productId" element={<Product />} />
+      </Routes>
+    </BrowserRouter>
+  </PageProvider>
 );

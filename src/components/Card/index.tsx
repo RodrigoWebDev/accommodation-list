@@ -1,7 +1,7 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 interface CardProps {
-  children?: any;
+  children?: ReactNode;
   customClass?: string
 }
 

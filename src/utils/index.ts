@@ -9,7 +9,7 @@ export const formatCurrency = (number: number) => {
 }
 
 export const getPriceText = ({ price, type}: GetPriceTextParams) => {
-  const formatedPrice = formatCurrency(price)
+  const formatedPrice = formatCurrency(price || 0)
     if(type === 'hotel'){
       return `${formatedPrice}/Night`
     }

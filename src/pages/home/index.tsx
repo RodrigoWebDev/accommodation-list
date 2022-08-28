@@ -14,7 +14,6 @@ const Home = () => {
         title='Welcome! Choose your next adventure'
         list={list} 
       />
-
       <ToastContainer />
     </>
   )
