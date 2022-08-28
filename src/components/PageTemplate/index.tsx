@@ -10,8 +10,12 @@ import Message from "../../components/Message"
 //Utils
 import { getPriceText } from "../../utils"
 
-//interfaces
+//Interfaces
 import { ListTypes } from "../../interfaces"
+
+//Assets
+//@ts-ignore
+import bannerImg from "../../assets/banner.jpg"
 
 interface Props {
   list: ListTypes[]
@@ -59,14 +63,14 @@ const PageTemplate = ({ list, title, listFallBack }: Props) => {
     <Layout>
       <Banner
         title={title}
-        image='https://storage.googleapis.com/images-lugares/master/aeecb1e1dd20ea59a334c5741c36ff368d5e0157-0b31fafbdc8a67d157710385144a5be7'
+        image={bannerImg}
       />
       <main className="px-4">
-        <div className="flex justify-center items-center mb-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center mb-4">
           <strong className="text-gray-700 mr-2">Order by: </strong>
           <Select 
             onChange={(e: any) => handleOrderChange(e)} 
-            className="max-w-[300px] w-[300px]" 
+            className="max-w-full w-full sm:max-w-[300px] sm:w-[300px]" 
             options={orderOptions} />
         </div>
         <div className="sm:flex sm:flex-wrap justify-center">
