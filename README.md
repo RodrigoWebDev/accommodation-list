@@ -1,5 +1,7 @@
 # Accommodation List
 
+Go to the [website](https://accommodation-list.netlify.app/)
+
 ## Get started
 
 - Install the project: `npm i`
