@@ -40,7 +40,6 @@ const Product = () => {
   const buyText = () => productInfo?.type === 'hotel' ? 'Book' : undefined
 
   const favoriteButtonClick = () => {
-    console.log({ isFavorite })
     if(isFavorite){
       removeFavorite()
       toast("Favorite removed")

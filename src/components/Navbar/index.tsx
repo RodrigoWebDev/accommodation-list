@@ -14,6 +14,10 @@ import xMark from "../../assets/circle-x-mark.svg"
 
 const navItems = [
   {
+    name: 'Home',
+    url: '/'
+  },
+  {
     name: 'Favorites',
     url: '/favorites'
   },
@@ -57,7 +61,7 @@ const NavBar = () => {
                 />
               </div>
               {navItems.map(({ name, url }) =>
-                <li className="nav-item md:p-2">
+                <li key={name} className="nav-item md:p-2">
                   <Link 
                     to={url}
                     className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-4 block md:inline md:p-0" 

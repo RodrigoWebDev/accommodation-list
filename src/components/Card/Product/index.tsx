@@ -16,7 +16,7 @@ interface CardProps {
   address: string
   about: string
   price: string,
-  id: number,
+  id: string,
   customClass: string
 }
 

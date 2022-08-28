@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 
 //Components
 import Layout from "../../components/Layout"
@@ -8,7 +8,16 @@ import Banner from "../../components/Banner"
 //Utils
 import { getPriceText } from "../../utils"
 
-const PageTemplate = ({ list, title }) => {
+//interfaces
+import { ListTypes } from "../../interfaces"
+
+interface Props {
+  list: ListTypes[]
+  title: string
+  listFallBack?: ReactNode
+}
+
+const PageTemplate = ({ list, title, listFallBack }: Props) => {
   return (
     <Layout>
       <Banner
@@ -17,19 +26,25 @@ const PageTemplate = ({ list, title }) => {
       />
       <main className="px-4">
         <div className="sm:flex sm:flex-wrap justify-center">
-          {list?.map(({ name, image, address, about, price, type, _id }) => 
-            <Fragment key={_id}>
-              <ProductCard
-                customClass="sm:w-[49%] lg:w-[32%] sm:p-[1%]" 
-                image={image}
-                name={name}
-                address={address}
-                about={about}
-                price={`$${getPriceText({price, type})}`}
-                id={_id}
-              />
-            </Fragment>
-          )}
+          {list.length ? 
+            <>
+              {list?.map(({ name, image, address, about, price, type, _id }) => 
+                <Fragment key={_id}>
+                  <ProductCard
+                    customClass="sm:w-[49%] lg:w-[32%] sm:p-[1%]" 
+                    image={image}
+                    name={name}
+                    address={address}
+                    about={about}
+                    price={`$${getPriceText({price, type})}`}
+                    id={_id}
+                  />
+                </Fragment>
+              )}
+            </> :
+            <>{listFallBack}</>
+          }
+          
         </div>
       </main>
     </Layout>
