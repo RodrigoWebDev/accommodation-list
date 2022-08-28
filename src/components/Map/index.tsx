@@ -8,7 +8,6 @@ interface Cordinates {
 }
 
 const Map = ({ lat, lng }: Cordinates) => {
-  console.log({lat, lng})
   const defaultProps = {
     center: {
       lat: lat,

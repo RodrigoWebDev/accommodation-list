@@ -1,35 +1,16 @@
-import React, { Fragment } from 'react'
-import useHome from "./hook"
+import React from 'react'
+import { usePageTemplate } from "../../hooks"
 
 //Components
-import Layout from "../../components/Layout"
-import ProductCard from "../../components/Card/Product"
-
-//Utils
-import { getPriceText } from "../../utils"
+import PageTemplate from '../../components/PageTemplate'
 
 const Home = () => {
-  const { list } = useHome()
+  const { list } = usePageTemplate()
   return (
-    <Layout>
-      <main className="px-4">
-        <div className="sm:flex sm:flex-wrap sm:justify-between">
-          {list?.map(({ name, image, address, about, price, type, _id }) => 
-            <Fragment key={_id}>
-              <ProductCard
-                customClass="sm:w-[49%] lg:w-[32%]" 
-                image={image}
-                name={name}
-                address={address}
-                about={about}
-                price={`$${getPriceText({price, type})}`}
-                id={_id}
-              />
-            </Fragment>
-          )}
-        </div>
-      </main>
-    </Layout>
+    <PageTemplate 
+      title='Welcome! Choose your next adventure'
+      list={list} 
+    />
   )
 }
 

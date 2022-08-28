@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
-import { useApi } from "../../hooks"
+import { useApi, useFavorite } from "../../hooks"
 import { ListTypes } from "../../interfaces"
 import { getPriceText } from "../../utils"
 
@@ -14,10 +16,12 @@ import Map from "../../components/Map"
 
 const Product = () => {
   const { productId } = useParams();
+  const { fetchList } = useApi();
+  const { addFavorite, isFavorite, removeFavorite } = useFavorite(productId);
   const [productInfo, setProductInfo] = useState<ListTypes>()
 
   const getProductInfo = () => {
-    useApi().fetchList({
+    fetchList({
       successCallback: (response) => {
         const responseItem = response.filter(item => item._id === productId)[0]
         setProductInfo(responseItem)
@@ -34,6 +38,19 @@ const Product = () => {
   const priceBeforeTaxes = () => parseFloat(productInfo?.price) - 50
 
   const buyText = () => productInfo?.type === 'hotel' ? 'Book' : undefined
+
+  const favoriteButtonClick = () => {
+    console.log({ isFavorite })
+    if(isFavorite){
+      removeFavorite()
+      toast("Favorite removed")
+    }else{
+      addFavorite()
+      toast("Favorite added")
+    }
+  }
+
+  const favoriteButtonText = () => isFavorite ? "Remove favorite" : 'Add to Favorites'
 
   useEffect(() => {
     getProductInfo()
@@ -61,6 +78,8 @@ const Product = () => {
               price={price()}
               priceBeforeTaxes={priceBeforeTaxes()}
               buyText={buyText()}
+              favoriteButtonClick={() => { favoriteButtonClick() }}
+              favoriteButtonText={favoriteButtonText()}
             />
           </aside>
         </div>
@@ -85,6 +104,7 @@ const Product = () => {
         }
 
       </main>
+      <ToastContainer />
     </Layout>
   )
 }

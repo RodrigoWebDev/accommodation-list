@@ -1,11 +1,22 @@
 import React from "react"
-import Layout from "../../components/Layout"
+import PageTemplate from "../../components/PageTemplate"
+import { usePageTemplate, useFavorite } from "../../hooks"
 
 const Favorites = () => {
+  const { list } = usePageTemplate()
+  const { favorites } = useFavorite()
+
+  const favoriteListCards = () => {
+    return list.filter(listItem => {
+      return favorites.some(item => listItem._id === item)
+    })
+  }
+
   return (
-    <Layout>
-      <h1>Favorites page</h1>
-    </Layout>
+    <PageTemplate 
+      title="Your favorites"
+      list={favoriteListCards()} 
+    />
   )
 }
 
