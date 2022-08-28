@@ -66,13 +66,17 @@ const PageTemplate = ({ list, title, listFallBack }: Props) => {
         image={bannerImg}
       />
       <main className="px-4">
-        <div className="flex flex-col sm:flex-row justify-center items-center mb-4">
-          <strong className="text-gray-700 mr-2">Order by: </strong>
-          <Select 
-            onChange={(e: any) => handleOrderChange(e)} 
-            className="max-w-full w-full sm:max-w-[300px] sm:w-[300px]" 
-            options={orderOptions} />
-        </div>
+
+        {list.length ? (
+          <div className="flex flex-col sm:flex-row justify-center items-center mb-4">
+            <strong className="text-gray-700 mr-2">Order by: </strong>
+            <Select 
+              onChange={(e: any) => handleOrderChange(e)} 
+              className="max-w-full w-full sm:max-w-[300px] sm:w-[300px]" 
+              options={orderOptions} />
+          </div>
+        ): <></>}
+        
         <div className="sm:flex sm:flex-wrap justify-center">
           {list.length ? 
             <>
