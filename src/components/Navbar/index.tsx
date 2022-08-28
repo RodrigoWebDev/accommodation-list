@@ -20,11 +20,7 @@ const navItems = [
   {
     name: 'Favorites',
     url: '/favorites'
-  },
-  {
-    name: 'About',
-    url: '/about'
-  },
+  }
 ]
 
 const iconSize = 'w-[32px] h-auto'

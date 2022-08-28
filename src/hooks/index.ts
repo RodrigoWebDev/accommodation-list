@@ -9,22 +9,28 @@ interface FetchListParams {
   finnalyCallBack: () => void
 }
 
-interface UsePageTemplateParams {
+interface HandleOrderChangeParams {
+  value: string
+  label: string
+}
+
+interface UsePageTemplateReturn {
   list: ListTypes[] | []
 }
 
-interface UseFavoriteParams {
+interface UseFavoriteReturn {
   addFavorite: () => void
-  isFavorite: boolean
+  isFavorite?: boolean
   removeFavorite: () => void
-  favorites: string[] | []
+  favorites: (string | undefined)[] | []
 }
 
-export const usePageTemplate = (): UsePageTemplateParams => {
+type Type = 'hotel' | 'transport' | 'attraction' | 'all'
+
+export const usePageTemplate = (): UsePageTemplateReturn => {
   const [list, setList] = useState<ListTypes[] | []>([])
   const { fetchList } = useApi()
   const { setIsFetching } = useContext(PageContext)
-
 
   useEffect(() => {
     setIsFetching(true)
@@ -40,6 +46,7 @@ export const usePageTemplate = (): UsePageTemplateParams => {
       }
     })
   }, [])
+
 
   return {
     list
@@ -82,9 +89,9 @@ export const useApi = () => {
   }
 }
 
-export const useFavorite = (productId?: string): UseFavoriteParams => {
-  const [favorites, setFavorites] = useState<string[] | []>([])
-  const [isFavorite, setIsFavorite] = useState()
+export const useFavorite = (productId?: string): UseFavoriteReturn => {
+  const [favorites, setFavorites] = useState<(string | undefined)[] | []>([])
+  const [isFavorite, setIsFavorite] = useState<boolean>()
 
   const getFavorites = () => {
     const localStorageFavorites = window.localStorage.getItem("favorites")
@@ -95,14 +102,15 @@ export const useFavorite = (productId?: string): UseFavoriteParams => {
   
   const isAlredyFavorite = () => {
     const check = favorites?.some(item => item === productId)
+    console.log({ check })
     setIsFavorite(check)
   }
 
   const addFavorite = () => {
     if(!isFavorite){
       const newFavorites = [...favorites, productId]
-      window.localStorage.setItem("favorites", JSON.stringify(newFavorites))
-      setFavorites(newFavorites)
+        window.localStorage.setItem("favorites", JSON.stringify(newFavorites))
+        setFavorites(newFavorites)
     }
   }
 

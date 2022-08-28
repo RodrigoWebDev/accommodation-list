@@ -12,7 +12,7 @@ const useProduct = () => {
   const { productId } = useParams();
   const { fetchList } = useApi();
   const { addFavorite, isFavorite, removeFavorite } = useFavorite(productId);
-  const [productInfo, setProductInfo] = useState()
+  const [productInfo, setProductInfo] = useState<ListTypes>()
   const { setIsFetching } = useContext(PageContext)
 
   const getProductInfo = () => {
