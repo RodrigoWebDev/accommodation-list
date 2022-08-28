@@ -1,18 +1,11 @@
 import React from "react"
 import PageTemplate from "../../components/PageTemplate"
-import { usePageTemplate, useFavorite } from "../../hooks"
 import { Link } from "react-router-dom"
+import useFavoritePage from "./hook"
 
 const Favorites = () => {
-  const { list } = usePageTemplate()
-  const { favorites } = useFavorite()
-
-  const favoriteListCards = () => {
-    return list.filter(listItem => {
-      return favorites.some(item => listItem._id === item)
-    })
-  }
-
+  const { favoriteListCards } = useFavoritePage()
+  
   const listFallBack = () => {
     return (
       <>

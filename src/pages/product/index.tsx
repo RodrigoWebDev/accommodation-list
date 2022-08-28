@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import React from "react"
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-
-import { useApi, useFavorite } from "../../hooks"
-import { ListTypes } from "../../interfaces"
-import { getPriceText } from "../../utils"
 
 //Components
 import Layout from "../../components/Layout"
@@ -13,47 +8,17 @@ import Banner from "../../components/Banner"
 import BuyCard from "../../components/Card/Buy"
 import ProductInformation from "../../components/ProductInformation"
 import Map from "../../components/Map"
+import useProduct from "./hook";
 
 const Product = () => {
-  const { productId } = useParams();
-  const { fetchList } = useApi();
-  const { addFavorite, isFavorite, removeFavorite } = useFavorite(productId);
-  const [productInfo, setProductInfo] = useState<ListTypes>()
-
-  const getProductInfo = () => {
-    fetchList({
-      successCallback: (response) => {
-        const responseItem = response.filter(item => item._id === productId)[0]
-        setProductInfo(responseItem)
-      }
-    })
-  }
-
-  const price = () => 
-    getPriceText({
-      price: productInfo?.price,
-      type: productInfo?.type
-    })
-
-  const priceBeforeTaxes = () => parseFloat(productInfo?.price) - 50
-
-  const buyText = () => productInfo?.type === 'hotel' ? 'Book' : undefined
-
-  const favoriteButtonClick = () => {
-    if(isFavorite){
-      removeFavorite()
-      toast("Favorite removed")
-    }else{
-      addFavorite()
-      toast("Favorite added")
-    }
-  }
-
-  const favoriteButtonText = () => isFavorite ? "Remove favorite" : 'Add to Favorites'
-
-  useEffect(() => {
-    getProductInfo()
-  }, [])
+  const {
+    productInfo,
+    price,
+    priceBeforeTaxes,
+    buyText,
+    favoriteButtonClick,
+    favoriteButtonText
+  } = useProduct()
 
   return (
     <Layout>

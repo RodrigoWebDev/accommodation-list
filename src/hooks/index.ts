@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import { ListTypes } from "../interfaces"
+import { toast } from 'react-toastify';
 
 interface FetchListParams {
   successCallback: (response: ListTypes[]) => void
+  errorCallback: () => void
 }
 
 export const usePageTemplate = () => {
@@ -13,7 +15,10 @@ export const usePageTemplate = () => {
     fetchList({
       successCallback: (response) => {
         setList(response)
-      } 
+      },
+      errorCallback: () => {
+        toast("There was an error querying the product list")
+      }
     })
   }, [])
 
@@ -38,14 +43,16 @@ export const useDesktop = () => {
 }
 
 export const useApi = () => {
-  const fetchList = ({ successCallback }: FetchListParams) => {
+  const fetchList = ({ successCallback, errorCallback }: FetchListParams) => {
     const endpoint = 'https://us-central1-rapid-api-321400.cloudfunctions.net/instaviagem-challenge'
     fetch(endpoint)
       .then(response => response.json())
       .then(response => {
         successCallback(response)
       })
-      .catch(err => console.error({err}))
+      .catch(() => {
+        errorCallback()
+      })
   }
 
   return {
