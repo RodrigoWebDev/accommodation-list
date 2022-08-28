@@ -3,7 +3,7 @@ import React from "react"
 const Footer = () => {
   return (
     <footer className="text-center text-white bg-[#f1f1f1]">
-      <div className="container pt-9">
+      <div className="pt-9">
         <div className="flex justify-center mb-9">
           <a href="https://www.linkedin.com/in/rodrigo-queiroz-chagas/" target="_blank" className="mr-9 text-gray-800">
             <svg
